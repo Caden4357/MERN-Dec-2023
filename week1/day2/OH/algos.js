@@ -43,3 +43,27 @@ const breakingTheRecords = (scoresArr) => {
     return [maxCount, minCount]
 }
 console.log(breakingTheRecords(scores));
+
+// 1.) Reverse array without builtins or creating a new array (working in place)
+// 2.) Count how many of each character in a string 
+// return an object with all the letters that are present and how many of each dont count capitals seperate 
+
+let s = 'hello Hi1!@#' // -> {h:2, e:1, l:2, 0:1, i:1}
+// 1.) create a function that takes in a string
+const charsOfStr = (str) => {
+    let result = {}
+    // make the string lowercase 
+    str = str.toLowerCase()
+    // loop through the string 
+    for(let i = 0; i < str.length; i++){
+        let char = str[i]
+        if(char.match(/^[a-zA-Z]+$/))
+        if(result[char]){
+            result[char]++
+        }else{
+            result[char] = 1
+        }
+    }
+    return result
+}
+console.log(charsOfStr(s));
