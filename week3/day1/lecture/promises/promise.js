@@ -1,4 +1,4 @@
-let trashGotTakenOut = true
+let trashGotTakenOut = false
 
 const takeOutTheTrash = new Promise((resolve, reject) => {
     if (trashGotTakenOut) {
@@ -12,8 +12,6 @@ const takeOutTheTrash = new Promise((resolve, reject) => {
 takeOutTheTrash
     .then(message => console.log(message))
     .catch(err => console.log(err))
-
-
 
 
 
