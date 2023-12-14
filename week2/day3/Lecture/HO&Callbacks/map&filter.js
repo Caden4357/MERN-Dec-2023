@@ -17,6 +17,6 @@ const nbaAthletes = [
 // console.log(evenNums);
 // console.log(nums);
 
-const pointGuards = nbaAthletes.filter((athletes, idx, wholeArray) => athletes.position === 'Point Guard')
+const pointGuards = nbaAthletes.filter((athletes) => athletes.position === 'Point Guard')
 console.log(pointGuards);
 
