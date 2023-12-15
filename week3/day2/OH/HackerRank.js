@@ -19,3 +19,19 @@ const comparingTriplets = (a, b) => {
     return result
 }
 console.log(comparingTriplets([1,2,3], [3,2,1]));
+
+// ? Staircase 
+// input (integer) 
+// output -> staircase made of # and spaces 
+// ex. n=4 would print
+//    #
+//   ##
+//  ###
+// ####
+const staircase = (n) => {
+    for (let i = 1; i <= n; i++){
+        // number of spaces is always n-i the number of # is i
+        console.log(' '.repeat(n-i) + '#'.repeat(i));
+    }
+}
+staircase(4)
