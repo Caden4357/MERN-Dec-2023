@@ -10,20 +10,20 @@ const options = [
 ]
 
 const AlbumForm = (props) => {
-    const { submitHandler, albumName, setAlbumName, artist, setArtist, releaseYear, setReleaseYear, genre, setGenre, errors } = props;
+    const { submitHandler, album, setAlbum, errors } = props;
     const [dropdown, setDropdown] = useState([])
 
     useEffect(() => {
-        generateDropdown(genre)
-    }, [])
+        generateDropdown(album.genre)
+    }, [album.genre])
 
     const generateDropdown = (genre) => {
-        const optionTags = options.map((option) => {
+        const optionTags = options.map((option, idx) => {
             if(option.value === genre){
-                return <option value={option.value} selected>{option.value}</option>
+                return <option key={idx} value={option.value} selected>{option.value}</option>
             }
             else{
-                return <option value={option.value}>{option.value}</option>
+                return <option key={idx} value={option.value}>{option.value}</option>
             }
         })
         setDropdown(optionTags)
@@ -35,28 +35,28 @@ const AlbumForm = (props) => {
             <h2>Add To Our Collection</h2>
             <form onSubmit={submitHandler}>
                 <label>Album Name:</label>
-                <input type="text" onChange={(e) => setAlbumName(e.target.value)} value={albumName} />
+                <input type="text" onChange={(e) => setAlbum({...album, albumName:e.target.value})} value={album.albumName} />
                 {
                     errors.albumName ?
                         <p>{errors.albumName.message}</p> :
                         null
                 }
                 <label>Artist:</label>
-                <input type="text" onChange={(e) => setArtist(e.target.value)} value={artist} />
+                <input type="text" onChange={(e) => setAlbum({...album, artist:e.target.value})} value={album.artist} />
                 {
                     errors.artist ?
                         <p>{errors.artist.message}</p> :
                         null
                 }
                 <label>Release Year:</label>
-                <input type="number" onChange={(e) => setReleaseYear(e.target.value)} value={releaseYear} />
+                <input type="number" onChange={(e) => setAlbum({...album, releaseYear:e.target.value})} value={album.releaseYear} />
                 {
                     errors.releaseYear ?
                         <p>{errors.releaseYear.message}</p> :
                         null
                 }
                 <label>Genre:</label>
-                <select onChange={(e) => setGenre(e.target.value)}>
+                <select onChange={(e) => setAlbum({...album, genre:e.target.value})}>
                     {
                         dropdown.map((option) => (
                             option

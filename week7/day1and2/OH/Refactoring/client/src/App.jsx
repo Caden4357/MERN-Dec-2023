@@ -20,7 +20,6 @@ function App() {
         <Route path="/newAlbum" element={<CreateForm />} />
         <Route path='/album/:id' element={<ViewOne/>}/>
         <Route path='/edit/:id' element={<Edit/>}/>
-
       </Routes>
     </>
   )

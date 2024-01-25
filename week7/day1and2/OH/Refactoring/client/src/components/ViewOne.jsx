@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import DeleteButton from './DeleteButton';
 
 const ViewOne = (props) => {
-    const navigate = useNavigate()
     const [album, setAlbum] = useState({})
     const {id} = useParams()
 
@@ -17,15 +17,6 @@ const ViewOne = (props) => {
             })
     }, [])
 
-    const deleteHandler = () => {
-        axios.delete(`http://localhost:8000/api/deleteAlbum/${id}`)
-            .then(() => {
-                navigate('/')
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
     return (
         <div>
             <h1>{album.albumName}</h1>
@@ -33,7 +24,7 @@ const ViewOne = (props) => {
                 <h2>By: {album.artist}</h2>
                 <h2>Released In: {album.releaseYear}</h2>
                 <h2>Genre: {album.genre}</h2>
-                <button onClick={deleteHandler}>Delete {album.albumName}</button>
+                <DeleteButton buttonText={`Delete ${album.albumName}`} id={album._id} /> 
             </div>
         </div>
 )}
