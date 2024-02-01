@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios'
-// import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 const Register = (props) => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -16,6 +16,7 @@ const Register = (props) => {
         axios.post('http://localhost:8000/api/registerUser', newUser, {withCredentials:true})
             .then((res) => {
                 console.log(res);
+                navigate('/home')
             })
             .catch((err) => {
                 console.log(err);
@@ -47,6 +48,7 @@ const Register = (props) => {
                 </div>
                 <button>Register</button>
             </form>
+            <Link to={'/login'}>Dont have an account? Sign up here</Link>
         </div>
 )}
 

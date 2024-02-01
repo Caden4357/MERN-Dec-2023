@@ -6,15 +6,15 @@ module.exports = {
     registerUser: async (req, res) => {
         try {
             // Check if the user already exists 
-            console.log(req.body);
             const potentialUser = await User.findOne({ email: req.body.email })
             if (potentialUser) {
-                res.status(400).json({ message: 'This email already exists please log in' })
+                res.status(500).json({ message: 'This email already exists please log in' })
             }
             else {
                 const newUser = await User.create(req.body)
                 const userToken = jwt.sign({ id: newUser._id, email: newUser.email }, secretKey, { expiresIn: '2h' })
-                res.status(201).cookie('userToken', userToken, { httpOnly: true }).json(newUser)
+                console.log(userToken);
+                res.status(201).cookie('userToken', userToken, {httpOnly: true}).json(newUser)
             }
         }
         catch (err) {
@@ -32,10 +32,10 @@ module.exports = {
                     const userToken = jwt.sign({ id: potentialUser._id, email: potentialUser.email }, secretKey, { expiresIn: '2h' })
                     res.status(201).cookie('userToken', userToken, { httpOnly: true }).json(potentialUser)
                 }else{
-                    res.status(400).json({message:'Invalid Email/Password'})
+                    res.status(500).json({message:'Invalid Email/Password'})
                 }
             }else{
-                res.status(400).json({message:'Invalid Email/Password'})
+                res.status(500).json({message:'Invalid Email/Password'})
             }
         }
         catch (err) {
@@ -43,6 +43,8 @@ module.exports = {
         }
     },
     logoutUser: (req, res) => {
+        console.log('COOKIES LOGOUT ', req.cookies);
+        // console.log(req.signedCookies);
         res.clearCookie('userToken')
         res.status(200).json({message:'User Logged Out'})
     }
